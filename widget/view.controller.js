@@ -43,8 +43,9 @@
             $scope.config.moduleList.push({ 'title': layer.title, 'data': data })
           }
           else {
-            var data = pagedTotalData.fieldRows[0][$scope.config.customModuleField].value[layer.value];
-            $scope.config.moduleList.push({ 'title': layer.title, 'data': data })
+            var data = CommonUtils.isUndefined(pagedTotalData.fieldRows[0][$scope.config.customModuleField].value) ? undefined : 
+                        pagedTotalData.fieldRows[0][$scope.config.customModuleField].value[layer.value];
+            $scope.config.moduleList.push({ 'title': layer.title, 'data': data });
           }
         });
         createFunnel();
@@ -122,7 +123,7 @@
 
         //setting count to the perticular layer
         var count = document.createElement('div');
-        count.setAttribute('id', $scope.config.wid+'layer-'+(i+1)+"-count")//set unique id to the element
+        count.setAttribute('id', $scope.config.wid + 'layer-' + (i + 1) + "-count")//set unique id to the element
         count.setAttribute('style', 'font-weight:bold;')
         var dataIsNumberCheck = Number($scope.config.moduleList[i].data);
 
